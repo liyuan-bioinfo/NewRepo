@@ -1,0 +1,87 @@
+---
+title: "In-class exercises 1-6"
+output: html_document
+time: 2020年9月10日20:15:08
+author: Li-Yuan
+---
+
+```{}
+#------exercise1---------
+setwd("C:/Users/Administrator/Desktop/R_test_0910/ESE5023")
+getwd() #ok
+
+#------exercise2--------
+X1  <- 50
+X2  <- 120
+X3  <- X2 * 2.0
+X4  <- X1 - 20
+X5  <- X1 > X2
+X3 == X4 #false
+X3 > X4 #TRUE
+rm(X1)
+rm(X2)
+rm(X3)
+#------exercise3--------
+#1 means we draw one value from the sample, 0 and 100 mean the sample is uniformly #distributed between zero and one hundred.
+Score <- runif(1, 0, 100)
+Score
+  if (Score > 90) {
+    print("Excellent") 
+  } else if (Score>80 && Score <= 90){
+    print("Great")
+  } else if (Score>70 && Score <= 80){
+  print("Pass")
+} else if (Score >60 && Score <= 70){
+  print("Pass")
+}else{
+  print("Fail")
+}  
+
+
+  if (Score > 90) {
+    print("Excellent") 
+  } else if(80 < Score <= 90){
+    print("Great")
+  }
+
+Estimation <- function(){
+  if(j < m){
+    print("j < m")
+  }else{
+    #end
+  }
+
+}
+
+#------exercise4--------
+TotalStudents <- 40
+Score         <- runif(TotalStudents,0,100)
+PassStudents  <- 0
+NotPassStudent <- 0
+for (Whatever in Score) {
+  if(Whatever >= 90){
+    PassStudents <- PassStudents + 1
+  }else if(Whatever < 30){
+    NotPassStudent <- NotPassStudent + 1
+  }
+}
+print("How many students pass:")
+PassStudents
+print("How many students not pass:")
+NotPassStudent
+
+#------exercise5--------
+F2C <- function(F){
+  C=(F-32)*5/9
+  return(C)
+}
+C <- F2C(100)
+print(C)
+
+#-----exercise6--------
+library(ggplot2)
+library(plyr)
+library(gapminder) #install.packages("gapminder")
+library(lubridate) #...
+today()
+```

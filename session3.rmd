@@ -1,0 +1,112 @@
+---
+title: "main_pca"
+output: html_document
+desc: data structure
+reference: https://zhu-group.github.io/ese5023/Section_03.html
+---
+
+```{r}
+rm(list=ls())
+#getwd()
+Keeling_Data <- read.csv(file = "co2_mm_mlo.csv", header = T)
+colnames(Keeling_Data)
+head(Keeling_Data)
+
+range(Keeling_Data$co2)
+median(Keeling_Data$co2)
+hist(Keeling_Data$co2)
+summary(Keeling_Data$co2)
+
+Keeling_Data$co2[0] #numeric(0)
+plot(Keeling_Data$decimal_date, Keeling_Data$co2)
+plot(Keeling_Data$decimal_date, Keeling_Data$co2, ylim = c(300,420), type = "l")
+
+Year <- Keeling_Data$decimal_date
+CO2_ppm <- Keeling_Data$co2
+CO2_ppm[which(CO2_ppm == -99.99) ] <- NA
+plot(Year, CO2_ppm, type="l")
+
+mean(CO2_ppm) #NA
+mean(CO2_ppm, na.rm=TRUE)
+
+#data structure
+typeof(CO2_ppm)
+typeof(Keeling_Data$month) # what's wrong with the code
+typeof(Keeling_Data$quality) #integer
+
+x <- 1 <= 2
+typeof(x) #logical
+typeof(1) #double
+typeof(1L)#integer
+typeof(1+1i) ##complex
+
+class(Keeling_Data) #dadaframe
+typeof(Keeling_Data) #list
+
+#vector
+##a list of some things with same type
+vector_1 <- vector(length=3)
+vector_1
+class(vector_1) #logical
+vector_2 <- vector(mode="character", length=3)
+typeof(vector_2) #character
+str(vector_2)
+vector3 <- c(1, 2, 3, 4)
+vector4 <- c(1, "2", FALSE) #convert to character
+as.character(vector3) #transform to character
+
+
+str(Keeling_Data$month)
+factor(Keeling_Data$month)
+list1 <- list(1, "2", 8+9i) #flexble
+class(list1) #list
+str(list1) #type of all elements
+typeof(list1) #list
+
+class(Keeling_Data) #data.frame
+typeof(Keeling_Data)#list
+
+matrix1 <- matrix(runif(30,0,1), ncol=5, nrow=6) #二维数组
+matrix1
+
+array <- array(0, dim = c(2,3,4)) #构建三维数组
+array
+
+class(array)
+typeof(array)
+
+#---------exercise1----------#
+Keeling_Data[2] #column month as varible
+Keeling_Data[[2]]  #factor, 第二层
+Keeling_Data$month #factor
+Keeling_Data["month"] #column month as variable
+Keeling_Data[2, 2] #factor
+Keeling_Data[, 2] #factor
+Keeling_Data[2, ] #factor
+
+#--------exercise2---------#
+matrix(data = c(1:50),ncol=5, nrow=10)
+
+#--------exercise3----------#
+data <- read.csv("2281305.csv",header = T)
+names(data)
+data$BaoAn_T <- data$TMP
+typeof(data$BaoAn_T) #integer
+data$Obs_Time <- data$DATE
+typeof(data$Obs_Time) #integer
+
+substr("abcde",1,3)
+data$BaoAn_T_value <- substr(data$BaoAn_T,2,5)
+data$BaoAn_T_flag <- substr(data$BaoAn_T,-1,1)
+data$BaoAn_T_value2 <- as.numeric(data$BaoAn_T_value)
+data$BaoAn_T_value2[which(data$BaoAn_T_value2==9999)] <- NA
+data$BaoAn_T_value3 <- data$BaoAn_T_value2 * 0.1
+data$Obs_Time2 <- as.Date(data$Obs_Time)
+plot(data$Obs_Time2,data$BaoAn_T_value3,type="l",col = "red", lwd = 0.1)
+min(data$BaoAn_T_value2) #NA
+min(data$BaoAn_T_value2,na.rm=T) #18
+which.max(data$BaoAn_T_value3)
+data$Obs_Time[which.min(data$BaoAn_T_value3)]
+data$Obs_Time[which.max(data$BaoAn_T_value3)]
+
+```
